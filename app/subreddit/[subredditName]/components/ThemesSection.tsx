@@ -32,11 +32,12 @@ export function ThemesSection({ posts }: ThemesSectionProps) {
         {Object.entries(themes).map(([key, title]) => (
           <Card 
             key={key} 
-            className={`cursor-pointer hover:shadow-lg transition-shadow ${selectedTheme === key ? 'border-blue-500 border-2' : ''}`}
+            className={`cursor-pointer hover:shadow-lg transition-shadow bg-gray-800 text-white
+              ${selectedTheme === key ? 'border-orange-500 border-2' : 'border-gray-700'}`}
             onClick={() => handleThemeClick(key)}
           >
             <CardHeader>
-              <CardTitle>{title}</CardTitle>
+              <CardTitle className="text-orange-500">{title}</CardTitle>
             </CardHeader>
             <CardContent>
               <p>{getPostsByTheme(key).length} posts</p>
@@ -47,7 +48,7 @@ export function ThemesSection({ posts }: ThemesSectionProps) {
       
       {selectedTheme && (
         <div className="mt-8">
-          <h3 className="text-xl font-bold mb-4">{themes[selectedTheme as keyof typeof themes]}</h3>
+          <h3 className="text-2xl font-bold mb-4 text-orange-500">{themes[selectedTheme as keyof typeof themes]}</h3>
           <TopPostsTable posts={getPostsByTheme(selectedTheme)} />
         </div>
       )}

@@ -9,6 +9,7 @@ import { TopPostsTable } from './components/TopPostsTable';
 import { ThemesSection } from './components/ThemesSection';
 import type { RedditPost } from '@/lib/reddit';
 import type { WithCategory } from '@/lib/openai';
+import { FaReddit } from 'react-icons/fa';
 
 export default function SubredditPage() {
   const params = useParams();
@@ -39,33 +40,40 @@ export default function SubredditPage() {
   }, [subredditName]);
 
   return (
-    <main className="container mx-auto p-4 pb-12">
-      <div className="flex justify-between mb-6">
-        <h1 className="text-3xl font-bold">r/{subredditName}</h1>
-        <Link href="/">
-          <Button variant="outline">← Volver</Button>
-        </Link>
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      <div className="container mx-auto p-8">
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-4xl font-extrabold flex items-center">
+            <FaReddit className="text-orange-500 mr-4 text-5xl" />
+            r/{subredditName}
+          </h1>
+          <Link href="/">
+            <Button variant="outline" className="text-base bg-gray-700 text-white hover:bg-gray-600 hover:text-white">
+              ← Volver
+            </Button>
+          </Link>
+        </div>
+        <SubredditTabs>
+          <TopPostsTab>
+            <h2 className="text-2xl font-semibold mb-4 text-orange-500">Top Posts</h2>
+            {error && <p className="text-red-500">{error}</p>}
+            {loading ? (
+              <p className="text-gray-300">Cargando top posts...</p>
+            ) : (
+              <TopPostsTable posts={topPosts} />
+            )}
+          </TopPostsTab>
+          <ThemesTab>
+            <h2 className="text-2xl font-semibold mb-4 text-orange-500">Temas</h2>
+            {error && <p className="text-red-500">{error}</p>}
+            {loading ? (
+              <p className="text-gray-300">Cargando temas...</p>
+            ) : (
+              <ThemesSection posts={topPosts} />
+            )}
+          </ThemesTab>
+        </SubredditTabs>
       </div>
-      <SubredditTabs>
-        <TopPostsTab>
-          <h2 className="text-2xl font-semibold mb-4">Top Posts</h2>
-          {error && <p className="text-red-500">{error}</p>}
-          {loading ? (
-            <p>Cargando top posts...</p>
-          ) : (
-            <TopPostsTable posts={topPosts} />
-          )}
-        </TopPostsTab>
-        <ThemesTab>
-          <h2 className="text-2xl font-semibold mb-4">Temas</h2>
-          {error && <p className="text-red-500">{error}</p>}
-          {loading ? (
-            <p>Cargando temas...</p>
-          ) : (
-            <ThemesSection posts={topPosts} />
-          )}
-        </ThemesTab>
-      </SubredditTabs>
     </main>
   );
 }

@@ -10,9 +10,19 @@ interface SubredditTabsProps {
 export function SubredditTabs({ children }: SubredditTabsProps) {
   return (
     <Tabs defaultValue="top-posts" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="top-posts">Top Posts</TabsTrigger>
-        <TabsTrigger value="themes">Themes</TabsTrigger>
+      <TabsList className="grid w-full grid-cols-2 bg-gray-800 p-1 rounded-lg">
+        <TabsTrigger 
+          value="top-posts"
+          className="text-white font-bold data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+        >
+          Top Posts
+        </TabsTrigger>
+        <TabsTrigger 
+          value="themes"
+          className="text-white font-bold data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+        >
+          Temas
+        </TabsTrigger>
       </TabsList>
       {children}
     </Tabs>
@@ -20,9 +30,9 @@ export function SubredditTabs({ children }: SubredditTabsProps) {
 }
 
 export function TopPostsTab({ children }: { children: React.ReactNode }) {
-  return <TabsContent value="top-posts">{children}</TabsContent>
+  return <TabsContent value="top-posts" className="mt-6">{children}</TabsContent>
 }
 
 export function ThemesTab({ children }: { children: React.ReactNode }) {
-  return <TabsContent value="themes">{children}</TabsContent>
+  return <TabsContent value="themes" className="mt-6">{children}</TabsContent>
 }

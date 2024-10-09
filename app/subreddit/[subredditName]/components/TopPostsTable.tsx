@@ -62,7 +62,7 @@ export function TopPostsTable({ posts }: TopPostsTableProps) {
 
   const SortableHeader = ({ field, children }: { field: SortField; children: React.ReactNode }) => (
     <TableHead className="text-center">
-      <Button variant="ghost" onClick={() => handleSort(field)}>
+      <Button variant="ghost" onClick={() => handleSort(field)} className="text-orange-500 hover:text-orange-400">
         {children}
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
@@ -70,43 +70,45 @@ export function TopPostsTable({ posts }: TopPostsTableProps) {
   );
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <SortableHeader field="title">Título</SortableHeader>
-          <SortableHeader field="author">Autor</SortableHeader>
-          <SortableHeader field="num_comments">Comentarios</SortableHeader>
-          <SortableHeader field="score">Puntuación</SortableHeader>
-          <TableHead className="text-center">Categorías</TableHead>
-          <SortableHeader field="created_utc">Fecha</SortableHeader>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sortedPosts.map((post, index) => (
-          <TableRow key={index}>
-            <TableCell>
-              <a href={post.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                {post.title}
-              </a>
-            </TableCell>
-            <TableCell>{post.author}</TableCell>
-            <TableCell className="text-center">{post.num_comments}</TableCell>
-            <TableCell className="text-center">{post.score}</TableCell>
-            <TableCell className="flex flex-wrap gap-1 justify-center">
-              <>
-                {Object.entries(post.category).map(([category, isPresent]) => 
-                  isPresent && (
-                    <Badge key={category} className={`text-xs ${getCategoryColor(category)}`}>
-                      {getCategoryName(category)}
-                    </Badge>
-                  )
-                )}
-              </>
-            </TableCell>
-            <TableCell className="text-center">{new Date(post.created_utc).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
+    <div className="rounded-md border border-gray-700 overflow-hidden bg-gray-900 p-2">
+      <Table>
+        <TableHeader>
+          <TableRow className="hover:bg-gray-800">
+            <SortableHeader field="title">Título</SortableHeader>
+            <SortableHeader field="author">Autor</SortableHeader>
+            <SortableHeader field="num_comments">Comentarios</SortableHeader>
+            <SortableHeader field="score">Puntuación</SortableHeader>
+            <TableHead className="text-center text-orange-500">Categorías</TableHead>
+            <SortableHeader field="created_utc">Fecha</SortableHeader>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {sortedPosts.map((post, index) => (
+            <TableRow key={index} className="hover:bg-gray-800">
+              <TableCell className="font-medium py-4">
+                <a href={post.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">
+                  {post.title}
+                </a>
+              </TableCell>
+              <TableCell>{post.author}</TableCell>
+              <TableCell className="text-center">{post.num_comments}</TableCell>
+              <TableCell className="text-center">{post.score}</TableCell>
+              <TableCell className="flex flex-wrap gap-1 justify-center">
+                <>
+                  {Object.entries(post.category).map(([category, isPresent]) => 
+                    isPresent && (
+                      <Badge key={category} className={`text-xs ${getCategoryColor(category)} text-white`}>
+                        {getCategoryName(category)}
+                      </Badge>
+                    )
+                  )}
+                </>
+              </TableCell>
+              <TableCell className="text-center">{new Date(post.created_utc).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
