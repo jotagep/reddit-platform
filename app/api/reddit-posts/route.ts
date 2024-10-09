@@ -11,11 +11,15 @@ export async function GET(request: Request) {
   }
 
   try {
+    // Obtener posts utilizando la nueva lógica de caché
     const posts = await fetchTopPosts(subreddit);
+
+    // Analizar los posts utilizando la nueva lógica de caché
     const analyzedPosts = await analyzePostsBatch(posts);
+
     return NextResponse.json(analyzedPosts);
   } catch (error) {
-    console.error('Error al obtener los posts de Reddit:', error);
-    return NextResponse.json({ error: 'Error al obtener los posts de Reddit' }, { status: 500 });
+    console.error('Error al obtener y analizar los posts de Reddit:', error);
+    return NextResponse.json({ error: 'Error al procesar los posts de Reddit' }, { status: 500 });
   }
 }

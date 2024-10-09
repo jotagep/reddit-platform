@@ -109,31 +109,50 @@ We are building a Reddit Analytics Platform where users can gain insights into d
 ```
 reddit-platform/
 ├── README.md
-├── .env
 ├── app
+│   ├── api
+│   │   └── reddit-posts
+│   │       └── route.ts
 │   ├── favicon.ico
+│   ├── fonts
+│   │   ├── GeistMonoVF.woff
+│   │   └── GeistVF.woff
 │   ├── globals.css
 │   ├── layout.tsx
+│   ├── not-found.tsx
 │   ├── page.tsx
 │   └── subreddit
 │       └── [subredditName]
-│           ├── page.tsx
-│           └── components
-│               ├── Tabs.tsx
-│               ├── TopPostsTable.tsx
-│               ├── ThemesSection.tsx
-│               └── PostSidePanel.tsx
+│           ├── components
+│           └── page.tsx
 ├── components
 │   ├── AddSubredditModal.tsx
 │   ├── SubredditCard.tsx
-│   └── ThemeCard.tsx
+│   └── ui
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── dialog.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── sheet.tsx
+│       ├── table.tsx
+│       └── tabs.tsx
+├── components.json
+├── examples
+│   ├── categoryAnalyzer.ts
+│   └── redditFetcher.ts
+├── instructions
+│   └── instructions.md
 ├── lib
 │   ├── openai.ts
 │   ├── reddit.ts
-│   └── types.ts
+│   └── utils.ts
 ├── next-env.d.ts
 ├── next.config.mjs
+├── package-lock.json
 ├── package.json
+├── postcss.config.mjs
 ├── tailwind.config.ts
 └── tsconfig.json
 ```

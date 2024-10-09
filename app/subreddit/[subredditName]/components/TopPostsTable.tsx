@@ -103,7 +103,7 @@ export function TopPostsTable({ posts }: TopPostsTableProps) {
                 )}
               </>
             </TableCell>
-            <TableCell className="text-center">{new Date(post.created_utc * 1000).toLocaleString()}</TableCell>
+            <TableCell className="text-center">{new Date(post.created_utc).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
           </TableRow>
         ))}
       </TableBody>
